@@ -1,10 +1,10 @@
 
 `george_rowberry_python` is a small snippet of python code to download pictures.  
-It was developed as an entry test requirement for a position at a company.
+It was developed as an entry test requirement for a position at a company at Karlsruhe.
 
 ## Installation
 
-It was developed under ubuntu and it depends on `python3.5`  
+The development environmen was ubuntu and the code targets `python3.5`  
 To install the dependencies you will need to setup a virtual environment using the following command.
 
 ``` sh
@@ -13,7 +13,7 @@ python3 -m venv .venv
 
 ## Usage
 
-**Syntax:** download **(** [`filename`] **)**
+**Syntax:** download **(** [`-f filename`] **)**
 
 ### Arguments
 
