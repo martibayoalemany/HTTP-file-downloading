@@ -16,6 +16,9 @@ class test_initialize(unittest.TestCase):
         warnings.resetwarnings()
 
     def test_initialize(self):
+        """
+            - It checks whether the initializer creates the output_txt file
+        """
         initializer = Initializer()
         initializer.execute(is_unit_test=True)
         self.assertIsNotNone(initializer.output_txt)
@@ -30,6 +33,9 @@ class test_initialize(unittest.TestCase):
         self.assertTrue(not os.path.exists(initializer.output_txt))
 
     def test_initialize_with_no_options(self):
+        """
+            - It mocks the Option parser and checks whether the Initializer still works
+        """
         old_parser = optparse.OptionParser
         try:
             optparse.OptionsParser = mock.MagicMock(spec=optparse.OptionParser)

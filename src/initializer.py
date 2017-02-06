@@ -1,4 +1,3 @@
-from contextlib import contextmanager
 from optparse import OptionParser
 
 import os
@@ -27,7 +26,10 @@ class Initializer:
         self._output_txt = None
         self._is_unit_test = False
 
-    def execute(self, is_unit_test = False):
+    def execute(self, is_unit_test=False):
+        """
+            It parses the options, fetch htmls and parsers pics inside the htmls
+        """
         self._is_unit_test = is_unit_test
         self._output_txt = parse_options()
         # In case the file does not exists it generates a file with urls
@@ -55,19 +57,22 @@ class Initializer:
         """
             It parses the html in the input and stores the pictures in the output_txt
         """
-        br = browser.Browser()
-        br.set_handle_robots(False)
-        response = br.open(input_html)
-        response_txt = response.read()
-        count = 0
-        soup = bs4.BeautifulSoup(response_txt, "html.parser")
         try:
+            br = browser.Browser()
+            br.set_handle_robots(False)
+            response = br.open(input_html)
+            response_txt = response.read()
+            count = 0
+            soup = bs4.BeautifulSoup(response_txt, "html.parser")
+
             pics = soup.find_all("img")
             pics = (pic["src"] for pic in pics if pic.attrs.has_key("src"))
             with codecs.open(self.output_txt, "w", "utf-8") as f:
                 for pic in pics:
                     f.write("{}\n".format(pic))
                     count += 1
+        except Exception as e:
+            print "_init_url:", e
         finally:
             # it frees memory, specially important if the html file was a large one
             if soup is not None:

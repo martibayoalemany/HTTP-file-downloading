@@ -15,6 +15,9 @@ class Downloader:
 
     @staticmethod
     def get_path_from_url(url):
+        """
+            - It maps urls to a local folder for later download
+        """
         if not urlparse.urlparse(url).scheme:
             return None
         target_file = urlparse.urlsplit(url).path.split("/")[-1]
@@ -40,6 +43,9 @@ class Downloader:
 
     @staticmethod
     def _download(url):
+        """
+            - it downloads one url at a time and stores the content into the download folder
+        """
         try:
             if url is None or not (isinstance(url, str) or isinstance(url, unicode)):
                 return 0
