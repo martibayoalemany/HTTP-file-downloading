@@ -4,3 +4,6 @@
 *.pyc
 downloads/*
 !downloads/input_urls.txt
+build/*
+requirements*.txt
+!requirements.txt

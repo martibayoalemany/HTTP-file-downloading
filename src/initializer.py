@@ -4,6 +4,7 @@ import os
 import codecs
 import bs4 as bs4
 import mechanize as browser
+import six
 
 
 def parse_options():
@@ -12,7 +13,7 @@ def parse_options():
     parser.add_option("-i", "--input-file", action="store", dest="input_file", default=default_input_file)
     (options, args) = parser.parse_args()
     if options is not None:
-        return unicode(options.input_file)
+        return six.u(options.input_file)
     return None
 
 
@@ -72,7 +73,7 @@ class Initializer:
                     f.write("{}\n".format(pic))
                     count += 1
         except Exception as e:
-            print "_init_url:", e
+            print("_init_url:", e)
         finally:
             # it frees memory, specially important if the html file was a large one
             if soup is not None:
