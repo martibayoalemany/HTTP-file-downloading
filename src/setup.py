@@ -6,7 +6,7 @@ import unittest
 
 def my_test_suite():
     test_loader = unittest.TestLoader()
-    test_suite = test_loader.discover('tests', pattern='test_*.py')
+    test_suite = test_loader.discover('.', pattern='test_*.py')
     return test_suite
 
 
@@ -16,7 +16,7 @@ setup(name='george_rowberry_python',
       author='Marti Bayo Alemany',
       author_email='martibayoalemany@grafai.com',
       url='http://grafai.com',
-      #packages=find_packages(),
-      packages=['file_downloader'],
+      packages=find_packages(),
+      #packages=['file_downloader'],
       test_suite='setup.my_test_suite'
       )
