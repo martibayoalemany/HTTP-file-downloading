@@ -1,6 +1,5 @@
 from downloader import Downloader
-from initializer import Initializer, parse_options
+from constants import Constants
 
-__all__=['Initializer',
-         'Downloader',
-         'parse_options']
+__all__=['Downloader',
+         'Constants']

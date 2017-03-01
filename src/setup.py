@@ -17,6 +17,6 @@ setup(name='george_rowberry_python',
       author_email='martibayoalemany@grafai.com',
       url='http://grafai.com',
       packages=find_packages(),
-      #packages=['file_downloader'],
       test_suite='setup.my_test_suite'
       )
+
