@@ -5,7 +5,7 @@ import warnings
 
 import mock as mock
 
-from initializer import Initializer
+from file_downloader import *
 
 
 class test_initialize(unittest.TestCase):
@@ -26,7 +26,7 @@ class test_initialize(unittest.TestCase):
 
         # A second call to execute should work without exceptions
         initializer.execute(is_unit_test=True)
-        self.assertTrue(os.path.exists(initializer.output_txt))
+        self.assertTrue(os.path.exists(initializer.output_txt), msg=initializer.output_txt)
 
         # Remove the artifacts generated and check that they are gone
         os.remove(initializer.output_txt)
@@ -51,5 +51,3 @@ class test_initialize(unittest.TestCase):
         finally:
             optparse.OptionsParser = old_parser
 
-if __name__ == "__main__":
-    unittest.main()

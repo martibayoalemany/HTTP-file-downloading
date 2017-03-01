@@ -1,5 +1,6 @@
 import multiprocessing
 import os
+import six
 import urlparse
 
 import itertools
@@ -7,6 +8,8 @@ import itertools
 import time
 
 from mechanize import Request, urlopen, HTTPError, URLError
+
+from paths import Paths
 
 
 class Downloader:
@@ -22,7 +25,7 @@ class Downloader:
             return None
         target_file = urlparse.urlsplit(url).path.split("/")[-1]
         if target_file is not None:
-            return os.path.join(os.path.abspath("../downloads/"), target_file.rstrip())
+            return os.path.join(Paths.get_downloads_abspath(), target_file.rstrip())
         else:
             return None
 
@@ -47,7 +50,7 @@ class Downloader:
             - it downloads one url at a time and stores the content into the download folder
         """
         try:
-            if url is None or not (isinstance(url, str) or isinstance(url, unicode)):
+            if url is None or not isinstance(url, six.types.StringTypes):
                 return 0
             target_file_name = Downloader.get_path_from_url(url)
             if target_file_name is None:

@@ -6,10 +6,12 @@ import bs4 as bs4
 import mechanize as browser
 import six
 
+from paths import Paths
+
 
 def parse_options():
     parser = OptionParser()
-    default_input_file = os.path.join(os.path.abspath("../downloads/"), "input_urls.txt")
+    default_input_file = Paths.get_downloads_urlspath()
     parser.add_option("-i", "--input-file", action="store", dest="input_file", default=default_input_file)
     (options, args) = parser.parse_args()
     if options is not None:
@@ -29,11 +31,13 @@ class Initializer:
 
     def execute(self, is_unit_test=False):
         """
-            It parses the options, fetch htmls and parsers pics inside the htmls
+            It parses the options, fetch htmls and parses the pics inside the htmls
         """
         self._is_unit_test = is_unit_test
         self._output_txt = parse_options()
         # In case the file does not exists it generates a file with urls
+        if self.output_txt is None:
+            self._output_txt = Paths.get_downloads_urlspath()
         if not os.path.exists(self._output_txt):
             self._init_urls()
         return self.output_txt
@@ -75,7 +79,7 @@ class Initializer:
         except Exception as e:
             print("_init_url:", e)
         finally:
-            # it frees memory, specially important if the html file was a large one
+            # it frees memory to prevent a memory leak if the html file was a large one
             if soup is not None:
                 soup.decompose()
         print("init urls for input file {} with {} pics".format(input_html, count))

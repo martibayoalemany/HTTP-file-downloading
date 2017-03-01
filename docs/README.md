@@ -18,8 +18,10 @@ python3 -m venv .venv3 // for python 3.5
 pip install Sphinx
 make html
 ```
-
-
+## Unit tests
+```
+    python setup.py test
+```
 ## Usage
 
 **Syntax:** download **(** [`-f filename`] **)**
