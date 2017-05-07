@@ -6,12 +6,13 @@ from file_downloader.downloader_hyper import _doExecute, download
 
 
 class test_download_hyper(unittest.TestCase):
-
+    @unittest.skip("test skipping")
     def test_execute_failed(self):
         self.assertFalse(_doExecute(None)[0])
         self.assertFalse(_doExecute([])[0])
         self.assertFalse(_doExecute(".....sd")[0])
 
+    @unittest.skip("test skipping")
     def test_download_image_failed(self):
         with self.assertRaises(exceptions.OSError):
             download(links=["https://c1.staticflickr.com/11c62358_n.jpg"])
