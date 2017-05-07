@@ -1,6 +1,5 @@
 
-`george_rowberry_python` is a snippet of python code to download pictures.  
-It is developed for an entry test requirement for a company.
+`python-file-downloader` File downloader in python as required for a coding entry test to a company
 
 ## Installation
 

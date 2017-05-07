@@ -10,12 +10,12 @@ def my_test_suite():
     return test_suite
 
 
-setup(name='george_rowberry_python',
+setup(name='file_downloader',
       version='1.0',
-      description='Snippets',
+      description='job entry test requirement',
       author='Marti Bayo Alemany',
-      author_email='martibayoalemany@grafai.com',
-      url='http://grafai.com',
+      author_email='martibayoalemany@gmail.com',
+      url='http://graphai.co',
       packages=find_packages(),
       test_suite='setup.my_test_suite'
       )
