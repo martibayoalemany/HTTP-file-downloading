@@ -4,6 +4,8 @@ import urlparse
 
 import bs4
 import exceptions
+
+import shutil
 import six
 from mechanize import Browser
 
@@ -14,12 +16,13 @@ sys.path.insert(0, filePath + '/file_downloader')
 # noinspection PyClassHasNoInit
 class Constants(object):
     @classmethod
-    def load_links(cls):
+    def load_links(cls, max_links=-1):
         """        
         :return: a list of urls that link to images 
         """
         links = list()
         soup = None
+        links_num = 0
         for url in ["https://goo.gl/W0cMUf",
                     "https://goo.gl/oDi4jg",
                     "https://goo.gl/qBcMct",
@@ -27,12 +30,17 @@ class Constants(object):
                     "https://goo.gl/Kr0nmT",
                     "https://goo.gl/MDTzh8"]:
             try:
+                print("init urls for input file {}".format(url))
                 br = Browser()
                 br.set_handle_robots(False)
                 soup = bs4.BeautifulSoup(br.open(url).read(), "html.parser")
                 pics = soup.find_all("img")
                 pics = [pic["src"] for pic in pics if pic.attrs.has_key("src")]
-                [links.append(pic) for pic in pics]
+                for pic in pics:
+                    links.append(pic)
+                    links_num += 1
+                    if max_links != -1 and links_num >= max_links:
+                        return links
             except Exception as e:
                 print("_init_url:", e)
             finally:
@@ -41,6 +49,11 @@ class Constants(object):
                     soup.decompose()
             print("init urls for input file {} with {} pics".format(url, len(links)))
         return links
+
+    @classmethod
+    def remove_output_dir(cls):
+        output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../downloads/")
+        shutil.rmtree(output_dir, ignore_errors=True)
 
     @classmethod
     def get_output_for_url(cls, url):

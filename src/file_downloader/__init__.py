@@ -1,5 +1,5 @@
-from downloader import Downloader
+from downloader import download
 from constants import Constants
 
-__all__=['Downloader',
+__all__=['download',
          'Constants']

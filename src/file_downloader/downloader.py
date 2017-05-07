@@ -1,44 +1,45 @@
-import itertools
 import multiprocessing
 import time
+import traceback
+
+import exceptions
 import six
 from mechanize import Request, urlopen
+
 from constants import Constants
 
+verbose = False
 
-class Downloader:
-    verbose = False
 
-    def __init__(self):
-        pass
+def download(links=[], max_links=-1, num_processes=1):
+    if len(links) is 0:
+        links = Constants.load_links(max_links)
+    start = time.time()
 
-    def execute(self, num_processes=1):
-        links = Constants.load_links()
-        start = time.time()
-        chunks = itertools.tee(links, num_processes)
-        processes = list()
-        for chunk in chunks:
-            p = multiprocessing.Process(target=lambda chunk_param: [self._doExecute(url) for url in chunk_param],
-                                        args={chunk})
-            processes.append(p)
-        [p.start() for p in processes]
-        [p.join() for p in processes]
-        print("Download with {} processes and {} links took {}".format(processes, len(links), (time.time() - start)))
+    pool = multiprocessing.Pool(processes=num_processes)
 
-    @classmethod
-    def _doExecute(cls, url):
-        try:
-            if url is None or not isinstance(url, six.types.StringTypes):
-                raise ValueError("No url was given to download")
-            if cls.verbose:
-                print("[Process: {}] - Downloading url {} ".format(multiprocessing.current_process(), url))
-            req = Request(url)
-            web_file = urlopen(req)
-            with open(Constants.get_output_for_url(url), "wb") as f:
-                f.write(web_file.read())
-        except Exception as e:
-            raise e
+    results = pool.map(_doExecute, links)
+    pool.close()
+    pool.join()
+    failed = filter(lambda r: r[0] is False, results)
 
-if __name__ == '__main__':
-    Downloader().execute(num_processes=2)
-    Downloader().execute(num_processes=6)
+    print("Download with {} processes and {} links took {}, failed {} "
+          .format(num_processes, len(links), (time.time() - start), len(failed)))
+
+    if len(failed):
+        raise (exceptions.OSError("Failed {}".format(len(failed))))
+
+
+def _doExecute(url):
+    try:
+        if url is None or not isinstance(url, six.types.StringTypes):
+            return False, "No url was given to download"
+        if verbose:
+            print("[Process: {}] - Downloading url {} ".format(multiprocessing.current_process(), url))
+        req = Request(url)
+        web_file = urlopen(req)
+        with open(Constants.get_output_for_url(url), "wb") as f:
+            f.write(web_file.read())
+        return True,
+    except Exception as e:
+        return False,

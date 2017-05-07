@@ -1,5 +1,6 @@
 
-### python-file-downloader 
+### python-file-downloader
+
 File downloader in python as required for a coding entry test to a company
 
 ## Initialize coding environment (python 2.x)
