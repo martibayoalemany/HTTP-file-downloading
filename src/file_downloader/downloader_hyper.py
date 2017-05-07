@@ -1,12 +1,8 @@
 import exceptions
 import multiprocessing
 import time
-import urlparse
 
-import six
-from mechanize import Request, urlopen
 from constants import Constants
-from hyper import HTTPConnection
 
 verbose = False
 serialize = False
