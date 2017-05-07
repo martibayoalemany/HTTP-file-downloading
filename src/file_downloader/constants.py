@@ -15,6 +15,8 @@ sys.path.insert(0, filePath + '/file_downloader')
 
 # noinspection PyClassHasNoInit
 class Constants(object):
+    picture_serialization = True
+
     @classmethod
     def load_links(cls, max_links=-1):
         """        

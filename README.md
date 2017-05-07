@@ -22,10 +22,8 @@ cd src
 python setup.py test
 ```
 
-## Documentation
-Install and execute Sphinx
+### Using the normal requests api to download images (python 2.x)
 
-```
-pip install Sphinx
-make html
-```
+Download with 2 processes and 100 links took 9.73853898048, failed 0
+Download with 4 processes and 100 links took 4.33651399612, failed 0
+Download with 8 processes and 100 links took 2.54078197479, failed 0

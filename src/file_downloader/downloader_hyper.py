@@ -1,15 +1,15 @@
+import exceptions
 import multiprocessing
 import time
-import traceback
+import urlparse
 
-import exceptions
 import six
 from mechanize import Request, urlopen
-
 from constants import Constants
-
+from hyper import HTTPConnection
 
 verbose = False
+serialize = False
 
 
 def download(links=[], max_links=-1, num_processes=1):
@@ -32,19 +32,28 @@ def download(links=[], max_links=-1, num_processes=1):
 
 
 def _doExecute(url):
+    # TODO: implement downloading with hyper
+    raise exceptions.NotImplementedError
+    """
     try:
         if url is None or not isinstance(url, six.types.StringTypes):
             return False, "No url was given to download"
         if verbose:
             print("[Process: {}] - Downloading url {} ".format(multiprocessing.current_process(), url))
-        req = Request(url)
-        web_file = urlopen(req)
+
+        url_p = urlparse.urlparse(url)
+        target = "{}://{}?{}".format(url_p.scheme, url_p.hostname, url_p.query)
+        conn = HTTPConnection(target)
+        conn.request('GET', url_p.path)
+        resp = conn.get_response()
+
         if Constants.picture_serialization:
             with open(Constants.get_output_for_url(url), "wb") as f:
-                f.write(web_file.read())
+                f.write(resp.read())
         else:
-            # For performance measurements
-            web_file.read()
+            # For performance measurement
+            resp.read()
         return True,
     except Exception as e:
         return False,
+    """
