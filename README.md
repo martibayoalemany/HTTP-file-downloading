@@ -1,35 +1,30 @@
 
-`python-file-downloader` File downloader in python as required for a coding entry test to a company
+`python-file-downloader` 
+File downloader in python as required for a coding entry test to a company
 
-## Installation
-
-- The development environment was linux and the code targets `python2.7`
-To install the dependencies you will need to setup a virtual environment using the following command.
-
-``` sh
-virtualenv .venv // for python 2.7
-python3 -m venv .venv3 // for python 3.5
+## Initialize project (python 2.x)
 ```
+virtualenv ~/.virtualenvs/venv27 
+source ~/.virtualenvs/venv27/bin/activate
+pip install -r requirements.txt
+cd src
+python setup.py test
+```
+
+## Initialize project (python 3.x)
+```
+python3 -m venv .venv3 
+source ~/.virtualenvs/.venv3/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+cd src
+python setup.py test
+```
+
 ## Documentation
-- Install and execute Sphinx
+Install and execute Sphinx
 
 ```
 pip install Sphinx
 make html
 ```
-## Unit tests
-```
-    python setup.py test
-```
-## Usage
-
-**Syntax:** download **(** [`-f filename`] **)**
-
-### Arguments
-
-* `filename` *String* (optional)
-A text file containing a list of urls to images
-
-### To-dos:
-- use hyper for http2.0 support  
-` from hyper import HTTPConnection `

@@ -1,4 +1,4 @@
-.. george_rowberry_python documentation master file, created by
+.. python file downloader documentation master file, created by
    sphinx-quickstart on Wed Mar  1 12:59:33 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.

@@ -14,6 +14,23 @@ class Downloader:
     def __init__(self, output_txt=Constants.get_downloads_urlspath()):
         self.output_txt = output_txt
         self.links = list()
+   
+    def execute(self, processes=1):
+        if not isinstance(self.links, six.types.ListType) or self.links is None:
+            raise Exception("links is not initialized to a list")
+        if not len(self.links):
+            self.load_links()
+        start = time.time()
+        chunks = itertools.tee(self.links, processes)
+        processes = []
+        for chunk in chunks:
+            p = multiprocessing.Process(target=lambda x: [self._execute(url[0]) for url in x], args={chunk})
+            processes.append(p)
+        for p in processes:
+            p.start()
+        for p in processes:
+            p.join()
+        print("Download with {} processes took {}".format(processes, (time.time() - start)))
 
     def load_links(self):
         soup = None
@@ -39,23 +56,6 @@ class Downloader:
         elif len(self.links) == 0:
             with codecs.open(self.output_txt, 'r', 'utf-8') as input:
                 self.links.append(input.readlines())
-
-    def execute(self, processes=1):
-        if not isinstance(self.links, six.types.ListType) or self.links is None:
-            raise Exception("links is not initialized to a list")
-        if not len(self.links):
-            self.load_links()
-        start = time.time()
-        chunks = itertools.tee(self.links, processes)
-        processes = []
-        for chunk in chunks:
-            p = multiprocessing.Process(target=lambda x: [self._execute(url[0]) for url in x], args={chunk})
-            processes.append(p)
-        for p in processes:
-            p.start()
-        for p in processes:
-            p.join()
-        print("Download with {} processes took {}".format(processes, (time.time() - start)))
 
     @staticmethod
     def _execute(url):

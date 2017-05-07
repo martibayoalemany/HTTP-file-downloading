@@ -1,10 +1,2 @@
-.venv
-.idea
-*.jpg
-*.pyc
-downloads/*
-build/*
-requirements*.txt
-!requirements.txt
-*.egg-info
-*~
+egg-info
+pyc
