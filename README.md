@@ -1,8 +1,8 @@
 
-`python-file-downloader` 
+### python-file-downloader 
 File downloader in python as required for a coding entry test to a company
 
-## Initialize project (python 2.x)
+## Initialize coding environment (python 2.x)
 ```
 virtualenv ~/.virtualenvs/venv27 
 source ~/.virtualenvs/venv27/bin/activate
@@ -11,7 +11,7 @@ cd src
 python setup.py test
 ```
 
-## Initialize project (python 3.x)
+## Initialize coding environment (python 3.x)
 ```
 python3 -m venv .venv3 
 source ~/.virtualenvs/.venv3/bin/activate
