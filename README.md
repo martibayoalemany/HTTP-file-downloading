@@ -1,7 +1,6 @@
-
 ### python-file-downloader
 
-File downloader in python as required for a coding entry test to a company
+File downloader in python 
 
 ## Initialize coding environment (python 2.x)
 ```
@@ -28,5 +27,4 @@ Download with 2 processes and 100 links took 9.73853898048, failed 0
  
 Download with 4 processes and 100 links took 4.33651399612, failed 0 
  
-Download with 8 processes and 100 links took 2.54078197479, failed 0 
- 
+Download with 8 processes and 100 links took 2.54078197479, failed 0
