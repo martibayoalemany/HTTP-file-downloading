@@ -2,5 +2,5 @@
 Developers
 ===========
 
-* MartÃ­ Bayo Alemany <martibayoalemany@grafai.com>
+* Martí Bayo Alemany <martibayoalemany@gmx.de>
 
