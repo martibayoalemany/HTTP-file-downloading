@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+CP=$(realpath $(dirname $0))
+source $CP/../.venv3/bin/activate
+
+function idem() {
+  echo $1
+}
+
+function gitignore_untracked() {
+    for an_arg in "$@" ; do
+      echo "${an_arg}"
+     done
+    git status  | sed '1,/Untracked/d' | grep -v '(use' | sed -e 's/\W\(.*\)/\1/g' | tee -a .gitignore
+}
+
+function pip_cache_wheels() {
+   mkdir wheels-cache
+   cat requirements.txt | xargs -n1 pip wheel --wheel-dir=wheels-cache
+}
+
+function pip_install_from_wheels() {
+    cat requirements.txt | xargs -n1 pip install --use-wheel --no-index --find-links=./wheels-cache
+}
+

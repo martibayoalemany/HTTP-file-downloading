@@ -57,7 +57,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'initializer'
 
 # General information about the project.
-project = u'george_rowberry_python'
+project = u'python-file-downloader'
 copyright = u'2017, Martí Bayo Alemany'
 author = u'Martí Bayo Alemany'
 

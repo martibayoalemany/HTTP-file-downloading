@@ -1,2 +1,9 @@
 egg-info
 pyc
+*.egg-info
+*.pyc
+.venv3
+wheels-cache
+.cache
+.venv27
+.eggs
