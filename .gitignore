@@ -7,3 +7,4 @@ wheels-cache
 .cache
 .venv27
 .eggs
+.vscode/tags
