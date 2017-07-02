@@ -1,26 +1,40 @@
+# pylint: skip-file
+"""
+ Test for the download api
+"""
 import exceptions
 import unittest
 
-from file_downloader import Constants
-from file_downloader.downloader import _doExecute, download
+from file_downloader import Constants, download, download_parallel
 
 
-class test_download(unittest.TestCase):
+class TestDownloader(unittest.TestCase):
+    """
+       It checks whether we can download several images with 2,4,7 and 16 processes
+    """
 
-    def test_execute_failed(self):
-        self.assertFalse(_doExecute(None)[0])
-        self.assertFalse(_doExecute([])[0])
-        self.assertFalse(_doExecute(".....sd")[0])
+    def test_parameters(self):
+        """
+            parameters check
+        """
+        self.assertFalse(download(None)[0])
+        self.assertFalse(download([])[0])
+        self.assertFalse(download(".....sd")[0])
 
-    def test_download_image_failed(self):
+    def test_download_failed(self):
+        """
+            Download a non existing image
+        """
         with self.assertRaises(exceptions.OSError):
-            download(links=["https://c1.staticflickr.com/11c62358_n.jpg"])
+            download_parallel(links=["https://not_existing_url"])
 
-    def test_speed(self):
+    def test_parallelization(self):
+        """
+            Download 100 links with multiple processes
+        """
         Constants.picture_serialization = False
         links = Constants.load_links(100)
-        for num in [2,4,7,16]:
-            download(links=links, num_processes=num)
-        for num in [2,4,7,16]:
-            download(links=links, num_processes=num)
-
+        for num in [2, 4, 7, 16]:
+            download_parallel(links=links, num_processes=num)
+        for num in [2, 4, 7, 16]:
+            download_parallel(links=links, num_processes=num)

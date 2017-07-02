@@ -1,0 +1,6 @@
+[submodule "src/modules/mechanize"]
+	path = src/modules/mechanize
+	url = https://github.com/python-mechanize/mechanize.git
+[submodule "src/modules/setuptools"]
+	path = src/modules/setuptools
+	url = https://github.com/pypa/setuptools.git

@@ -1,0 +1,12 @@
+include README.md
+
+# Include the scripts and tests
+graft scripts
+graft tests
+
+# Always exclude compiled python files
+global-exclude *.py[co]
+
+# Remove documentation builds
+prune docs/_build
+

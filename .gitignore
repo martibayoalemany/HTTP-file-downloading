@@ -1,2 +1,17 @@
 egg-info
 pyc
+*.egg-info
+*.pyc
+.venv3
+wheels-cache
+.cache
+.venv27
+.eggs
+.vscode/tags
+python_file_downloader.egg-info
+*.pyc
+build
+dist
+src/modules
+downloads/*
+!downloads/.gitkeep

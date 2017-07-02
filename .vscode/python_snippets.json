@@ -1,0 +1,10 @@
+// Open user ctrl+shift+p "User snippets"
+{
+    "skip pylint": {
+        "prefix": "skip_pylint",
+        "body": [
+            "# pylint: skip-file"
+        ],
+        "description": "Skip pylint"
+    }
+}

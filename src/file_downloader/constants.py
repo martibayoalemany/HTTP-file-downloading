@@ -1,17 +1,17 @@
+# pylint: skip-file
+from mechanize import Browser
+
 import os
 import sys
 import urlparse
-
 import bs4
 import exceptions
-
 import shutil
 import six
-from mechanize import Browser
+
 
 filePath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, filePath + '/file_downloader')
-
 
 # noinspection PyClassHasNoInit
 class Constants(object):
@@ -46,7 +46,7 @@ class Constants(object):
             except Exception as e:
                 print("_init_url:", e)
             finally:
-                # it frees memory to prevent a memory leak if the html file was a large one
+                # it frees memory to prevent a memory leak if the html file was a large one                
                 if soup is not None:
                     soup.decompose()
             print("init urls for input file {} with {} pics".format(url, len(links)))
