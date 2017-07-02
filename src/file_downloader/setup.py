@@ -1,4 +1,4 @@
-#!/usr/bin/env python27
+#!/usr/bin/env python
 # pylint: skip-file
 from setuptools import setup, find_packages
 import unittest
@@ -12,6 +12,8 @@ if sys.version_info < (2, 7):
 if sys.version_info.major > 2:
     raise SystemExit('file_downloader only works on python 2.x')
  
+sys.path.insert(0, os.getcwd())
+
 CLASSIFIERS = """\
 Natural Language :: English
 Operating System :: Linux
@@ -24,7 +26,7 @@ Topic :: Software Development :: Libraries
 
 def my_test_suite():
     test_loader = unittest.TestLoader()
-    test_suite = test_loader.discover('src/.', pattern='test_*.py')
+    test_suite = test_loader.discover('.', pattern='test_*.py')
     return test_suite
 
 
@@ -46,7 +48,7 @@ if __name__ == '__main__':
           cmdclass={
               'pyreqs': 'file_downloader:PyReqs'
           },
-          packages=['src/file_downloader'],
+          packages=find_packages(),
           entry_points={
               'disutils.commands': [
                   'py_reqs = file_downloader:PyReqs'

@@ -7,6 +7,11 @@ source $ROOT_PATH/.venv27/bin/activate
 function idem() {
   echo $1
 }
+function pip_ins_free() {
+    echo $1
+    pip install $1
+    [ $?=0 ] && (pip freeze | grep $1 | tee -a requirements.txt) || echo installation of $1 failed
+}
 
 function git_log() {
    git log --graph --pretty=format:'%C(Red) %h %C(Yellow) %s'

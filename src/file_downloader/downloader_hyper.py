@@ -1,33 +1,40 @@
+"""
+  Download with hyper
+"""
 import exceptions
 import multiprocessing
 import time
 
-from constants import Constants
+from .constants import Constants
 
 verbose = False
 serialize = False
 
 
-def download(links=[], max_links=-1, num_processes=1):
-    if len(links) is 0:
+def download_parallel(links, max_links=-1, num_processes=1):
+    """
+      Download files with hyper in parallel
+    """
+    if isinstance(links, list) and len(links) is 0:
         links = Constants.load_links(max_links)
     start = time.time()
 
     pool = multiprocessing.Pool(processes=num_processes)
 
-    results = pool.map(_doExecute, links)
+    results = pool.map(download, links)
     pool.close()
     pool.join()
-    failed = filter(lambda r: r[0] is False, results)
+
+    failed = [r[0] for r in results if not r[0]]
 
     print("Download with {} processes and {} links took {}, failed {} "
           .format(num_processes, len(links), (time.time() - start), len(failed)))
 
-    if len(failed):
-        raise (exceptions.OSError("Failed {}".format(len(failed))))
+    if any(len(failed)):
+        raise exceptions.OSError("Failed {}".format(len(failed)))
 
 
-def _doExecute(url):
+def download(url):
     # TODO: implement downloading with hyper
     raise exceptions.NotImplementedError
     """

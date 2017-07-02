@@ -1,8 +1,10 @@
 # pylint: skip-file
 import unittest
-from file_downloader import Constants
-from file_downloader.downloader import download
+import os
+import sys
 
+sys.path.append(os.path.realpath(os.getcwd() + '/..'))
+from file_downloader import Constants
 
 class TestConstants(unittest.TestCase):
 

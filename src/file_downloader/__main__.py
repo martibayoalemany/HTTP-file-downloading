@@ -24,4 +24,6 @@ class PyReqs(Command):
         pprint.pprint(reqs)
 
 if __name__ == "__main__":
-    print "File_downloader module"
+    filePath = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, filePath)
+    print "File_downloader module -> " + filePath

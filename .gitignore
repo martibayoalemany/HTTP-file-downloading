@@ -15,3 +15,6 @@ dist
 src/modules
 downloads/*
 !downloads/.gitkeep
+src/modules/*
+.coverage
+src/downloads/*

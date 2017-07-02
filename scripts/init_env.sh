@@ -17,15 +17,17 @@ if ! which pip > /dev/null; then
 fi
 
 
+cd $ROOT_DIR
 # python 3
 python3 -m venv .venv3 
 source .venv3/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r src/file_downloader/requirements_3_5.txt
 
 # python 2.7
 virtualenv .venv27
 source .venv27/bin/activate
 pip install --upgrade pip
+pip install -r src/file_downloader/requirements_2_7.txt
 
-python setup.py test
+python src/file_downloader/setup.py test

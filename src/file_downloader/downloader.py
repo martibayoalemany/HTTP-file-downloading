@@ -36,12 +36,12 @@ def download_parallel(links, num_processes=1):
     pool.close()
     pool.join()
 
-    failed = filter(lambda r: r[0] == False, results)
+    failed = [r[0] for r in results if not r[0]]
 
-    print("Download with {} processes and {} links in {}, succeded {} "
+    print("Download with {} processes and {} links in {}, failed {} "
           .format(num_processes, len(links), (time.time() - start), len(failed)))
 
-    if any(failed):
+    if len(failed) == num_processes:
         raise exceptions.OSError("Failed {}".format(len(failed)))
 
 
@@ -51,21 +51,24 @@ def download(url, serialize=Constants.picture_serialization):
     """
     try:
         if url is None or not isinstance(url, six.types.StringTypes):
-            return False, "No url was given to download"
+            print("No url was given to download")
+            return (False, "No url was given to download", url)
+        target = Constants.get_output_for_url(url)
         if verbose:
-            print(u"[Process: {}] - Downl. url {} "
-                  .format(multiprocessing.current_process(), url))
+            print(u"[Process: {}] - Downl. url {} - {}"
+                  .format(multiprocessing.current_process(), url, target))
         req = Request(url)
         web_file = urlopen(req)
         if serialize:
-            with open(Constants.get_output_for_url(url), "wb") as handle:
+            with open(target, "wb") as handle:
                 handle.write(web_file.read())
         else:
             # For performance measurements
             web_file.read()
-        return True,
+        return (True, None, url)
     except Exception as e:
-        return False, e
+        print(e)
+        return (False, e, url)
 
 
 def main():

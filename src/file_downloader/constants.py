@@ -8,10 +8,8 @@ import bs4
 import exceptions
 import shutil
 import six
+import re
 
-
-filePath = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, filePath + '/file_downloader')
 
 # noinspection PyClassHasNoInit
 class Constants(object):
@@ -46,7 +44,7 @@ class Constants(object):
             except Exception as e:
                 print("_init_url:", e)
             finally:
-                # it frees memory to prevent a memory leak if the html file was a large one                
+                # it frees memory to prevent a memory leak if the html file was a large one
                 if soup is not None:
                     soup.decompose()
             print("init urls for input file {} with {} pics".format(url, len(links)))
@@ -54,7 +52,8 @@ class Constants(object):
 
     @classmethod
     def remove_output_dir(cls):
-        output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../downloads/")
+        output_dir = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), "../../downloads/")
         shutil.rmtree(output_dir, ignore_errors=True)
 
     @classmethod
@@ -67,11 +66,11 @@ class Constants(object):
             raise exceptions.ValueError("Url is invalid")
 
         # Retrieves or creates the output dir
-        output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../downloads/")
+        output_dir = os.path.realpath(os.path.join(
+            os.path.abspath(__file__), "../../downloads"))
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
         # Appends the target file to the dir
-        target_file = urlparse.urlsplit(url).path.split("/")[-1]
-        return os.path.join(output_dir, target_file.rstrip())
-
+        target_filename = re.sub("[/:\&\?=\.]", "_", url)
+        return os.path.join(output_dir, target_filename)
