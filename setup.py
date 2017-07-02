@@ -30,6 +30,7 @@ def my_test_suite():
 
 if __name__ == '__main__':
 
+
     setup(name='file_downloader',
           test_suite='setup.my_test_suite',
           version='1.0.0',
@@ -50,7 +51,9 @@ if __name__ == '__main__':
               'disutils.commands': [
                   'py_reqs = file_downloader:PyReqs'
               ]
+
           },
           install_requires=[
           ]
+
           )

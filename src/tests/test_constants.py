@@ -9,6 +9,7 @@ class TestConstants(unittest.TestCase):
     def test_get_output_for_url(self):
         self.assertIsNotNone(Constants.get_output_for_url(
             "https://address/resources"))
+
         with self.assertRaises(ValueError):
             Constants.get_output_for_url("....asdsa")
         with self.assertRaises(ValueError):

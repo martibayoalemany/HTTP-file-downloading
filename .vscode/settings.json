@@ -5,12 +5,14 @@
   "python.unitTest.pyTestEnabled": false,
   "python.unitTest.unittestEnabled": true,
   "python.unitTest.nosetestsEnabled": false,
-  "python.tracebackJumper.enable": true,
   "python.unitTest.unittestArgs": [
+
     "-v",
     "-s",
     "./src",
     "-p",
     "test_*.py"
   ]
+
+
 }

@@ -1,5 +1,6 @@
 """
   It downloads pictures using multiprocessing.Pool and the Request api
+
 """
 # pylint: skip-file
 from mechanize import Request, urlopen
@@ -11,8 +12,8 @@ import traceback
 import exceptions
 import six
 
-
 verbose = False
+
 
 def download_dummies(max_links=-1, num_processes=1):
     """
@@ -21,18 +22,21 @@ def download_dummies(max_links=-1, num_processes=1):
     if len(links) is 0:
         links = Constants.load_links(max_links)
     download_parallel(links, num_processes)
-    
+
+
 def download_parallel(links, num_processes=1):
     """
       Downloads the list of :links:
-    """    
+    """
     start = time.time()
     pool = multiprocessing.Pool(processes=num_processes)
+
     results = pool.map(download, links)
+
     pool.close()
     pool.join()
-    
-    failed = filter( lambda r: r[0] == False, results)
+
+    failed = filter(lambda r: r[0] == False, results)
 
     print("Download with {} processes and {} links in {}, succeded {} "
           .format(num_processes, len(links), (time.time() - start), len(failed)))
@@ -63,8 +67,10 @@ def download(url, serialize=Constants.picture_serialization):
     except Exception as e:
         return False, e
 
-def main() :
+
+def main():
     print("Downloader main method")
+
 
 if __name__ == "__main__":
     print("Main method of file ", __file__)

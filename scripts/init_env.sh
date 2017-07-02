@@ -16,12 +16,16 @@ if ! which pip > /dev/null; then
    sudo apt install python-pip -y
 fi
 
-pip install --upgrade pip
 
-virtualenv .venv27
-source .venv27/bin/activate
-
+# python 3
 python3 -m venv .venv3 
 source .venv3/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
+
+# python 2.7
+virtualenv .venv27
+source .venv27/bin/activate
+pip install --upgrade pip
+
 python setup.py test

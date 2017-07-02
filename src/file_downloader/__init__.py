@@ -1,3 +1,4 @@
+# pylint: skip-file
 """
    File downloader, using multiprocessing api, mechanize and beautiful soup
 """
