@@ -8,9 +8,6 @@ import os
 
 if sys.version_info < (2, 7):
     raise SystemExit('file_downloader requires python >= 2.7')
-
-if sys.version_info.major > 2:
-    raise SystemExit('file_downloader only works on python 2.x')
  
 sys.path.insert(0, os.getcwd())
 

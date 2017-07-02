@@ -22,12 +22,12 @@ cd $ROOT_DIR
 python3 -m venv .venv3 
 source .venv3/bin/activate
 pip install --upgrade pip
-pip install -r src/file_downloader/requirements_3_5.txt
+pip install -r src/file_downloader/requirements.txt
 
 # python 2.7
 virtualenv .venv27
 source .venv27/bin/activate
 pip install --upgrade pip
-pip install -r src/file_downloader/requirements_2_7.txt
+pip install -r src/file_downloader/requirements.txt
 
 python src/file_downloader/setup.py test

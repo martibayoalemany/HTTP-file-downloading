@@ -73,8 +73,21 @@ pip install -r requirements.txt
 cd src
 python setup.py test
 ```
+## Add a new dependency
+It installs and adds a dependency to requirements.txt
+It prevents adding the dependencies of the dependencies, so if 
+a module changes we don't need to carry on with outdated dependencies.
+```
+source scripts/activate
+pip_ins_free coverage
+```
+## Testing with tox
+```
+ tox 
+ tox --recreate -e py27
+```
 
-### Using the normal requests api to download images (python 2.x)
+## Using the normal requests api to download images (python 2.x)
 Download with 2 processes and 100 links in 24.8611910343, failed 0
 Download with 4 processes and 100 links in 15.5404868126, failed 0
 Download with 7 processes and 100 links in 7.73024606705, failed 0

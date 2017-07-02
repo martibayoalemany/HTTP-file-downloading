@@ -1,16 +1,26 @@
 #!/usr/bin/env bash
 SCRIPT_PATH=$(realpath $(dirname $0))
-ROOT_PATH=$SCRIPT_PATH/../
+ROOT_PATH=$(realpath $SCRIPT_PATH/../)
 #source $ROOT_PATH/.venv3/bin/activate
-source $ROOT_PATH/.venv27/bin/activate
+#source $ROOT_PATH/.venv27/bin/activate
+
+if [ ! -f .tags ]
+then
+    ctags -f .tags -R $ROOT_PATH/.venv27/lib/python2.7/site-packages
+    ctags -fa .tags -R $ROOT_PATH/.venv3/lib/python3.5/site-packages
+    ctags -fa .tags -R $ROOT_PATH/src/file_downloader
+fi
+
 
 function idem() {
   echo $1
 }
 function pip_ins_free() {
+    [ $(python --version | cut -d' ' -f2 | sed -e 's/.*\(3\.5\).*/\1/g')='3.5' ] && requirements='requirements_3_5.txt' || requirements='requirements.txt'
     echo $1
     pip install $1
-    [ $?=0 ] && (pip freeze | grep $1 | tee -a requirements.txt) || echo installation of $1 failed
+    echo $requirements
+    [ $?=0 ] && (pip freeze | grep $1 | tee -a $ROOT_PATH/src/file_downloader/$requirements) || echo installation of $1 failed
 }
 
 function git_log() {
