@@ -87,16 +87,6 @@ pip_ins_free coverage
  tox --recreate -e py27
 ```
 
-## Using the normal requests api to download images (python 2.x) 
-Download with 2 processes and 100 links in 24.8611910343, failed 0  
-Download with 4 processes and 100 links in 15.5404868126, failed 0 
-Download with 7 processes and 100 links in 7.73024606705, failed 0 
-Download with 16 processes and 100 links in 10.9620878696, failed 0  
---- 
-Download with 2 processes and 100 links in 7.32104086876, succeded 0 
-Download with 4 processes and 100 links in 4.02314591408, succeded 0 
-Download with 7 processes and 100 links in 2.52503299713, succeded 0 
-Download with 16 processes and 100 links in 1.43182396889, succeded 0  
 
 ## TODO's 
 * Setup a local web server for network independent testing
