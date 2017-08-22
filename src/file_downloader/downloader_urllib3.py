@@ -38,8 +38,23 @@ if False :
             raise exceptions.OSError("Failed {}".format(len(failed)))
 
 
+    
     def download(url):
+        """
+            TO-DO - finish hyper api connection
+            c = HTTPConnection(graphai.facebook.FACEBOOK_GRAPH_URL)
+            stream_id = c.request('GET', graph.get_me_query_path())
+            resp = c.get_response()
+            print resp.headers
+            print resp.status
+            print resp.read()
 
+           # Using requests and hyper
+            s = requests.Session()
+            s.mount(graphai.facebook.FACEBOOK_GRAPH_URL, HTTP20Adapter())
+            r = s.get(graph.get_me_query_path())
+            r2 = s.get(graph.get_me_query_path())
+        """
         try:
             if url is None or not isinstance(url, six.types.StringTypes):
                 return False, "No url was given to download"
