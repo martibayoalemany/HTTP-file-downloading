@@ -1,7 +1,0 @@
-# Git synchronizing
-git remote add origin git@bitbucket.org:username/repository.git
-git remote add sync https://github.com/username/repository.git
-git remote -v
-git pull sync
-git branch --track github sync/master
-git config --global merge.stat true
