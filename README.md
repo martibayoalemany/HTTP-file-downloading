@@ -55,8 +55,8 @@ twine upload dist/*
 
 ## Add a new dependency
 It installs and adds a dependency to requirements.txt
-It prevents adding the dependencies of the dependencies, so if 
-a module changes we don't need to carry on with outdated dependencies.
+It prevents adding the dependencies of the dependencies. If 
+a module changes the dependencies we don't need to carry on with outdated dependencies.
 ```
 source scripts/activate
 pip_ins_free coverage
