@@ -52,24 +52,7 @@ pip install twine
 ls dist | xargs -n1 twine register
 twine upload dist/*
 ```
-## Initialize coding environment (python 2.x)
-```
-virtualenv ~/.virtualenvs/venv27 
-source ~/.virtualenvs/venv27/bin/activate
-pip install -r requirements.txt
-cd src
-python setup.py test
-```
 
-## Initialize coding environment (python 3.x)
-```
-python3 -m venv .venv3 
-source .venv3/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-cd src
-python setup.py test
-```
 ## Add a new dependency
 It installs and adds a dependency to requirements.txt
 It prevents adding the dependencies of the dependencies, so if 
@@ -78,12 +61,3 @@ a module changes we don't need to carry on with outdated dependencies.
 source scripts/activate
 pip_ins_free coverage
 ```
-## Testing with tox
-```
- tox 
- tox --recreate -e py27
-```
-
-
-## TODO's 
-* Setup a local web server for network independent testing
