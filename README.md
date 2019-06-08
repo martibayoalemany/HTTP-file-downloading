@@ -2,9 +2,6 @@
 
 Checking the file downloading apis
 
-### Remarks
- * BeautifulSoup and mechanize only works with python 2.7
-
 ### Builds or installs the package
 ```
 # SDIST - Generates egg-info and dist/*.tar.gz , sdist uses distutils and setuptools
